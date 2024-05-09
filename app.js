@@ -86,6 +86,7 @@ function checkFloat() {
 }
 
 function errorHandling(error){
+	// only need one if else if .... 
 	if (totalMoneyInTill == float) {
 		floatValueContainer.classList.add('border-success');
 		floatValueContainer.classList.remove('border-danger');
@@ -114,7 +115,6 @@ function checkTakings() {
 	if (profit < 0) {
 		console.log("Money is missing");
 	} else {
-		console.log("Checking money...")
 		createNewFloat();
 		enterProfit(profit);	
 		enterNewFloat();
@@ -284,7 +284,7 @@ function isFloatEnteredReasonable() {
 	const pennies = [2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
 
 	for(let i = 0; i < values.length; i ++ ) {
-		if(values[i].value != 0 && (values[i].value*100)%pennies[i] != 0) {
+		if(values[i].value != 0 && (Math.floor(values[i].value*100))%pennies[i] != 0) {
 			values[i].classList.add('border-danger');
 			correct = false;
 		} else {
