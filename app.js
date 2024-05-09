@@ -73,15 +73,20 @@ let takingsValueContainer = document.getElementById("takings_value_container");
 
 let floatErrorMsgContainer = document.getElementById("float_error_container");
 
+let profitTotalContainer = document.getElementById("profit_total");
+
 let float = 150.0; 
 let totalMoneyInTill = 0;
 
 function checkFloat() {
-	const error = !isFloatEnteredReasonable()
-	const value = sumFloat();
-	float_total.innerHTML= "£" + value
-	// add error handling to another function
-	if (value == float) {
+	const error = !isFloatEnteredReasonable();
+	totalMoneyInTill = sumFloat();
+	float_total.innerHTML= "£" + totalMoneyInTill;
+	errorHandling(error);	
+}
+
+function errorHandling(error){
+	if (totalMoneyInTill == float) {
 		floatValueContainer.classList.add('border-success');
 		floatValueContainer.classList.remove('border-danger');
 	} else {
@@ -90,7 +95,7 @@ function checkFloat() {
 	}
 	if (error) {
 		floatErrorMsgContainer.innerHTML = "Some values are input incorrectly!!";
-	} else if (value!= float) {
+	} else if (totalMoneyInTill!= float) {
 		floatErrorMsgContainer.innerHTML = "Total is not equal to £" + float;
 	} else {
 		floatErrorMsgContainer.innerHTML = ".";
@@ -102,14 +107,16 @@ function checkTakings() {
 	addToTillObject();
 	sumTakings();
 	const profit = totalMoneyInTill - float;
-	takingsTotal.innerHTML = "£" + profit.toFixed(2);
+	takingsTotal.innerHTML = "£" + totalMoneyInTill.toFixed(2);
+
+	//error handling needs updating 
 
 	if (profit < 0) {
 		console.log("Money is missing");
 	} else {
 		console.log("Checking money...")
 		createNewFloat();
-		enterProfit();	
+		enterProfit(profit);	
 		enterNewFloat();
 	}
 }
@@ -161,7 +168,20 @@ function createNewFloat() {
 	let total = totalMoneyInTill;
 	let escapeCounter = 0;
 
-	while(total != float &&  escapeCounter < 100) {
+	// const values = ["20pound", "10Pound", "5pound", "2Pound", "1Pound", "50Pence", "20Pence", "10Pence", "5Pence", "2Pence", "1Pence"];
+	// const pounds = [20, 10, 50, 2, 1, .5, .20, .10, .05, .02, .01];
+
+	while(total != float && escapeCounter < 100000) {
+
+		// for(let n = 0; n < values.length; n++){
+		// 	while (moneyInTill[values[n]] >= pounds[n] && total-pounds[n] >= float) {
+		// 		moneyInTill[values[n]] -= pounds[n];
+		// 		moneyInProfit[values[n]] += pounds[n];
+		// 		total-=pounds[n];
+		// 		escapeCounter++;
+		// 	}
+		// }
+		
 
 		while (moneyInTill["20pound"] >= 20 && total-20 >= float) {
 			moneyInTill["20pound"] -= 20;
@@ -218,13 +238,13 @@ function createNewFloat() {
 			moneyInProfit["1pence"] += .01;
 			total-=.01;
 		}
-
 		escapeCounter++;
+
 	} 
 
 }
 
-function enterProfit(){
+function enterProfit(profit){
 	twentyPoundProfit.value = moneyInProfit["20pound"];
 	tenPoundProfit.value = moneyInProfit["10pound"];
 	fivePoundProfit.value = moneyInProfit["5pound"];
@@ -236,22 +256,25 @@ function enterProfit(){
 	fivePenceProfit.value = moneyInProfit["5pence"];
 	twoPenceProfit.value = moneyInProfit["2pence"];
 	onePenceProfit.value= moneyInProfit["1pence"];
+
+	profitTotalContainer.innerHTML = "£" + profit.toFixed(2);
 }
 
 function enterNewFloat(){
-	// change title of leftmost form
-	
 	twentyPound.value = moneyInTill["20pound"];
 	tenPound.value = moneyInTill["10pound"];
 	fivePound.value = moneyInTill["5pound"];
 	twoPound.value = moneyInTill["2pound"];
 	onePound.value  = moneyInTill["1pound"];
 	fiftyPence.value = moneyInTill["50pence"];
-	twentyPence.value = moneyInTill["20pence"];
-	tenPence.value = moneyInTill["10pence"];
-	fivePence.value = moneyInTill["5pence"];
-	twoPence.value = moneyInTill["2pence"];
-	onePence.value= moneyInTill["1pence"];
+	twentyPence.value = moneyInTill["20pence"].toFixed(2);
+	tenPence.value = moneyInTill["10pence"].toFixed(2);
+	fivePence.value = moneyInTill["5pence"].toFixed(2);
+	twoPence.value = moneyInTill["2pence"].toFixed(2);
+	onePence.value= moneyInTill["1pence"].toFixed(2);
+
+	totalMoneyInTill = sumFloat();
+	float_total.innerHTML= "£" + totalMoneyInTill;
 }
 
 function isFloatEnteredReasonable() {
