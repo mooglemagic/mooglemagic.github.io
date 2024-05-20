@@ -2,26 +2,33 @@ body {
 	background-color: #EEE;
 }
 
+.row {
+	margin-bottom: 1rem;
+}
 
 
 /*SMALL SCREEN STYLES*/
 @media only screen and (max-width: 600px) {
 
 #page-title{
-	font-size: 22px;
+	font-size: 18px;
 }
 
 .col-heading{
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .col-money,
 .col-money input 
 	{
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .col-money label {
+	margin-bottom: 1px;
+}
+
+.row {
 	margin-bottom: 1px;
 }
 
