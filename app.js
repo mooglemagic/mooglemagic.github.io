@@ -38,17 +38,18 @@ let twoPenceProfit = document.getElementById("2p-profit");
 let onePenceProfit = document.getElementById("1p-profit");
 
 let moneyInTill = {
-	"20pound": 0,
-	"10pound": 0,
-	"5pound": 0,
-	"2pound": 0,
-	"1pound": 0,
-	"50pence": 0,
-	"20pence": 0,
-	"10pence": 0,
-	"5pence": 0,
-	"2pence": 0,
-	"1pence": 0 
+	// [amount, pence value]
+	"20pound": [0, 2000],
+	"10pound": [0, 1000],
+	"5pound": [0, 500],
+	"2pound": [0, 200],
+	"1pound": [0, 100],
+	"50pence": [0, 50],
+	"20pence": [0, 20],
+	"10pence": [0, 10],
+	"5pence": [0, 5],
+	"2pence": [0, 2],
+	"1pence": [0, 1] 
 }
 
 let moneyInProfit = {
@@ -106,9 +107,10 @@ function errorHandling(error){
 function checkTakings() {
 	clearTillObjects();
 	addToTillObject();
+	// takings is in pence
 	sumTakings();
-	const profit = totalMoneyInTill - float;
-	takingsTotal.innerHTML = "£" + totalMoneyInTill.toFixed(2);
+	const profit = (totalMoneyInTill - float*100)/100;
+	takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
 
 	//error handling needs updating 
 
@@ -123,28 +125,27 @@ function checkTakings() {
 
 function clearTillObjects() {
 	for(let m in moneyInTill){
-		moneyInTill[m] = 0;
+		moneyInTill[m][0] = 0;
 	}
 	for(let n in moneyInProfit){
 		moneyInProfit[n] = 0;
 	}
-
 	return 0;
 }
 
 function addToTillObject() {
-	moneyInTill["20pound"] = Number(twentyPoundTakings.value);
-	moneyInTill["10pound"] = Number(tenPoundTakings.value);
-	moneyInTill["5pound"] = Number(fivePoundTakings.value); 
-	moneyInTill["2pound"] = Number(twoPoundTakings.value);
-	moneyInTill["1pound"] = Number(onePoundTakings.value);
-	moneyInTill["50pence"] = Number(fiftyPenceTakings.value);
-	moneyInTill["20pence"] = Number(twentyPenceTakings.value);
-	moneyInTill["10pence"] = Number(tenPenceTakings.value);
-	moneyInTill["5pence"] = Number(fivePenceTakings.value);
-	moneyInTill["2pence"] = Number(twoPenceTakings.value);
-	moneyInTill["1pence"] = Number(onePenceTakings.value);
-
+	moneyInTill["20pound"][0] = Number(twentyPoundTakings.value)/20;
+	moneyInTill["10pound"][0] = Number(tenPoundTakings.value)/10;
+	moneyInTill["5pound"][0] = Number(fivePoundTakings.value)/5; 
+	moneyInTill["2pound"][0] = Number(twoPoundTakings.value)/2;
+	moneyInTill["1pound"][0] = Number(onePoundTakings.value);
+	moneyInTill["50pence"][0] = Math.round(Number(fiftyPenceTakings.value)/.5);
+	moneyInTill["20pence"][0] = Math.round(Number(twentyPenceTakings.value)/.2);
+	moneyInTill["10pence"][0] = Math.round(Number(tenPenceTakings.value)/.1);
+	moneyInTill["5pence"][0] = Math.round(Number(fivePenceTakings.value)/.05);
+	moneyInTill["2pence"][0] = Math.round(Number(twoPenceTakings.value)/.02);
+	moneyInTill["1pence"][0] = Math.round(Number(onePenceTakings.value)/.01);
+	//console.log(moneyInTill)
 }
 
 function sumFloat() {
@@ -156,9 +157,8 @@ function sumTakings() {
 	totalMoneyInTill = 0
 
 	for (let value in moneyInTill) {
-		totalMoneyInTill += moneyInTill[value]
+		totalMoneyInTill += moneyInTill[value][0]*moneyInTill[value][1]
 	}
-
 	return 0;
 }
 
@@ -167,76 +167,69 @@ function createNewFloat() {
 
 	let total = totalMoneyInTill;
 	let escapeCounter = 0;
+	let floatInPence = float*100
 
 	// const values = ["20pound", "10Pound", "5pound", "2Pound", "1Pound", "50Pence", "20Pence", "10Pence", "5Pence", "2Pence", "1Pence"];
 	// const pounds = [20, 10, 50, 2, 1, .5, .20, .10, .05, .02, .01];
 
-	while(total != float && escapeCounter < 100000) {
+	while(total != floatInPence && escapeCounter < 100000) {
+		// one for-loop?
 
-		// for(let n = 0; n < values.length; n++){
-		// 	while (moneyInTill[values[n]] >= pounds[n] && total-pounds[n] >= float) {
-		// 		moneyInTill[values[n]] -= pounds[n];
-		// 		moneyInProfit[values[n]] += pounds[n];
-		// 		total-=pounds[n];
-		// 		escapeCounter++;
-		// 	}
-		// }
-		
 
-		while (moneyInTill["20pound"] >= 20 && total-20 >= float) {
-			moneyInTill["20pound"] -= 20;
-			moneyInProfit["20pound"] += 20;
+		while (moneyInTill["20pound"][0] >= 1 && total-2000 >= floatInPence) {
+			moneyInTill["20pound"][0]--;
+			moneyInProfit["20pound"] += 1;
+			total-=2000;
+		}
+		while (moneyInTill["10pound"][0] >= 1 && total-1000 >= floatInPence) {
+			moneyInTill["10pound"][0]--;
+			moneyInProfit["10pound"] += 1;
+			total-=1000;
+		}
+		while (moneyInTill["5pound"][0] >= 1 && total-500 >= floatInPence) {
+			moneyInTill["5pound"][0]--;
+			moneyInProfit["5pound"] += 1;
+			total-=500;
+		}
+		while (moneyInTill["2pound"][0] >= 1 && total-200 >= floatInPence) {
+			moneyInTill["2pound"][0]--;
+			moneyInProfit["2pound"] += 1;
+			total-=200;
+		}
+		while (moneyInTill["1pound"][0] >= 1 && total-100 >= floatInPence) {
+			moneyInTill["1pound"][0]--;
+			moneyInProfit["1pound"] += 1;
+			total-=100;
+		}
+		while (moneyInTill["50pence"][0] >= 1 && total-50 >= floatInPence) {
+			moneyInTill["50pence"][0];
+			moneyInProfit["50pence"] += 1;
+			total-=50;
+		}
+		while (moneyInTill["20pence"][0] >= 1 && total-20 >= floatInPence) {
+			moneyInTill["20pence"][0];
+			moneyInProfit["20pence"] += 1;
 			total-=20;
 		}
-		while (moneyInTill["10pound"] >= 10 && total-10 >= float) {
-			moneyInTill["10pound"] -= 10;
-			moneyInProfit["10pound"] += 10;
+		while (moneyInTill["10pence"][0] >= 1 && total-10 >= floatInPence) {
+			moneyInTill["10pence"][0]--;
+			moneyInProfit["10pence"] += 1;
 			total-=10;
 		}
-		while (moneyInTill["5pound"] >= 5 && total-5 >= float) {
-			moneyInTill["5pound"] -= 5;
-			moneyInProfit["5pound"] += 5;
+		while (moneyInTill["5pence"][0] >= 1 && total-5 >= floatInPence) {
+			moneyInTill["5pence"][0]--;
+			moneyInProfit["5pence"] += 1;
 			total-=5;
 		}
-		while (moneyInTill["2pound"] >= 2 && total-2 >= float) {
-			moneyInTill["2pound"] -= 2;
-			moneyInProfit["2pound"] += 2;
+		while (moneyInTill["2pence"][0] >= 1 && total-2 >= floatInPence) {
+			moneyInTill["2pence"][0]--;
+			moneyInProfit["2pence"] += 1;
 			total-=2;
 		}
-		while (moneyInTill["1pound"] >= 1 && total-1 >= float) {
-			moneyInTill["1pound"] -= 1;
-			moneyInProfit["1pound"] += 1;
+		while (moneyInTill["1pence"][0] >= 1 && total-1 >= floatInPence) {
+			moneyInTill["1pence"][0]--;
+			moneyInProfit["1pence"] += 1;
 			total-=1;
-		}
-		while (moneyInTill["50pence"] >= .5 && total-.5 >= float) {
-			moneyInTill["50pence"] -= .5;
-			moneyInProfit["50pence"] += .5;
-			total-=.5;
-		}
-		while (moneyInTill["20pence"] >= .2 && total-.2 >= float) {
-			moneyInTill["20pence"] -= .2;
-			moneyInProfit["20pence"] += .2;
-			total-=.2;
-		}
-		while (moneyInTill["10pence"] >= .1 && total-.1 >= float) {
-			moneyInTill["10pence"] -= .1;
-			moneyInProfit["10pence"] += .1;
-			total-=.1;
-		}
-		while (moneyInTill["5pence"] >= .05 && total-.05 >= float) {
-			moneyInTill["5pence"] -= .05;
-			moneyInProfit["5pence"] += .05;
-			total-=.05;
-		}
-		while (moneyInTill["2pence"] >= .02 && total-.02 >= float) {
-			moneyInTill["2pence"] -= .02;
-			moneyInProfit["2pence"] += .02;
-			total-=.02;
-		}
-		while (moneyInTill["1pence"] >= .01 && total-.01 >= float) {
-			moneyInTill["1pence"] -= .01;
-			moneyInProfit["1pence"] += .01;
-			total-=.01;
 		}
 		escapeCounter++;
 
@@ -245,33 +238,33 @@ function createNewFloat() {
 }
 
 function enterProfit(profit){
-	twentyPoundProfit.value = moneyInProfit["20pound"];
-	tenPoundProfit.value = moneyInProfit["10pound"];
-	fivePoundProfit.value = moneyInProfit["5pound"];
-	twoPoundProfit.value = moneyInProfit["2pound"];
+	twentyPoundProfit.value = moneyInProfit["20pound"]*20;
+	tenPoundProfit.value = moneyInProfit["10pound"]*10;
+	fivePoundProfit.value = moneyInProfit["5pound"]*5;
+	twoPoundProfit.value = moneyInProfit["2pound"]*2;
 	onePoundProfit.value  = moneyInProfit["1pound"];
-	fiftyPenceProfit.value = moneyInProfit["50pence"];
-	twentyPenceProfit.value = moneyInProfit["20pence"];
-	tenPenceProfit.value = moneyInProfit["10pence"];
-	fivePenceProfit.value = moneyInProfit["5pence"];
-	twoPenceProfit.value = moneyInProfit["2pence"];
-	onePenceProfit.value= moneyInProfit["1pence"];
+	fiftyPenceProfit.value = (moneyInProfit["50pence"]*.5).toFixed(2);
+	twentyPenceProfit.value = (moneyInProfit["20pence"]*.2).toFixed(2);
+	tenPenceProfit.value = (moneyInProfit["10pence"]*.1).toFixed(2);
+	fivePenceProfit.value = (moneyInProfit["5pence"]*.05).toFixed(2);
+	twoPenceProfit.value = (moneyInProfit["2pence"]*.02).toFixed(2);
+	onePenceProfit.value= (moneyInProfit["1pence"]*.01).toFixed(2);
 
 	profitTotalContainer.innerHTML = "£" + profit.toFixed(2);
 }
 
 function enterNewFloat(){
-	twentyPound.value = moneyInTill["20pound"];
-	tenPound.value = moneyInTill["10pound"];
-	fivePound.value = moneyInTill["5pound"];
-	twoPound.value = moneyInTill["2pound"];
-	onePound.value  = moneyInTill["1pound"];
-	fiftyPence.value = moneyInTill["50pence"];
-	twentyPence.value = moneyInTill["20pence"].toFixed(2);
-	tenPence.value = moneyInTill["10pence"].toFixed(2);
-	fivePence.value = moneyInTill["5pence"].toFixed(2);
-	twoPence.value = moneyInTill["2pence"].toFixed(2);
-	onePence.value= moneyInTill["1pence"].toFixed(2);
+	twentyPound.value = moneyInTill["20pound"][0]*20;
+	tenPound.value = moneyInTill["10pound"][0]*10;
+	fivePound.value = moneyInTill["5pound"][0]*5;
+	twoPound.value = moneyInTill["2pound"][0]*2;
+	onePound.value  = moneyInTill["1pound"][0];
+	fiftyPence.value = (moneyInTill["50pence"][0]*.5).toFixed(2);
+	twentyPence.value = (moneyInTill["20pence"][0]*.2).toFixed(2);
+	tenPence.value = (moneyInTill["10pence"][0]*.1).toFixed(2);
+	fivePence.value = (moneyInTill["5pence"][0]*.05).toFixed(2);
+	twoPence.value = (moneyInTill["2pence"][0]*.02).toFixed(2);
+	onePence.value= (moneyInTill["1pence"][0]*.01).toFixed(2);
 
 	totalMoneyInTill = sumFloat();
 	float_total.innerHTML= "£" + totalMoneyInTill;
