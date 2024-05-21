@@ -202,12 +202,12 @@ function createNewFloat() {
 			total-=100;
 		}
 		while (moneyInTill["50pence"][0] >= 1 && total-50 >= floatInPence) {
-			moneyInTill["50pence"][0];
+			moneyInTill["50pence"][0]--;
 			moneyInProfit["50pence"] += 1;
 			total-=50;
 		}
 		while (moneyInTill["20pence"][0] >= 1 && total-20 >= floatInPence) {
-			moneyInTill["20pence"][0];
+			moneyInTill["20pence"][0]--;
 			moneyInProfit["20pence"] += 1;
 			total-=20;
 		}
