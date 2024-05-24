@@ -32,21 +32,20 @@
 	  </div>
 	</nav>
 
-	<div class="container-fluid">
+	<div class="container-fluid image-background">
 
-		<div class="jumbotron image-background">
-		  <h1 class="display-4">Crossword Helper</h1>
-  		  <hr class="my-4">
-		  <p class="lead">A simple app for helping solve those last crossword clues</p>		  
-		  <p class="lead">
-		    <a class="btn btn-primary btn-lg" href="#" role="button">Learn how to use</a>
-		  </p>
-		</div>
+	  <h1 class="display-4 text-center mb-5"> 
+	  	Crossword Helper
+	  </h1>
+	  <p class="lead">A simple app for helping solve those last crossword clues</p>		
+	  <hr class="my-4 mb-5">
+  
 
-		<div class="form-group">
+
+		<div class="form-group mb-3">
 			<form>
-				<label for="word">Enter Word:</label>
-				<input type="text" id="word" name="word" class="form-control" >
+				<label for="word" class="label">Enter Word:</label>
+				<input type="text" id="word" name="word" class="form-control mb-3 transparent-form" style="text-transform:uppercase" >
 				<button class="btn btn-primary btn-block" id="button" type="button" onclick="go()">Submit</button>	
 			</form>
 		</div>
@@ -67,7 +66,9 @@
 <script 	type="text/javascript" 
 			src="app.js">
 </script>
-
+<script 	type="text/javascript" 
+			src="words.js">
+</script>
 
 </body>
 </html>
