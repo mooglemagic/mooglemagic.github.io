@@ -1,0 +1,17 @@
+.project-container {
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+	min-width: 340px; 
+	min-height: 340px;
+}
+
+.project-container-crossword {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)), url("imgs/crossword.png");
+}
+
+.project-container-japanese {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)), url("imgs/tokyo.png");
+}
