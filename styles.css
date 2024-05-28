@@ -1,12 +1,26 @@
-.project-container {
-	background-repeat: no-repeat;
-	background-size: cover;
-	color: white;
-	min-width: 340px; 
-	min-height: 340px;
+.navbar {
+	border-bottom: black 4px solid;
 }
 
-.project-container-crossword {
+body {
+	background-color: #333;
+	color: #DDD;
+}
+
+.project-container {
+	background-color: rgba(100, 100, 100, 0.7);
+	color: #DDD;
+}
+
+.project-container img{
+	max-width: 30%;
+}
+
+.project-container a {
+	color: #DDD;
+}
+
+/*.project-container-crossword {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)), url("imgs/crossword.png");
 }
@@ -14,4 +28,11 @@
 .project-container-japanese {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)), url("imgs/tokyo.png");
+}*/
+
+
+/*freecodecamp styles*/
+#free-code-camp-projects h1{
+	font-family: monospace;
+	color: #7CFC00;
 }
