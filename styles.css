@@ -10,6 +10,7 @@ body {
 .project-container {
 	background-color: rgba(100, 100, 100, 0.7);
 	color: #DDD;
+	border: #AAA 2px solid;
 }
 
 .project-container img{
