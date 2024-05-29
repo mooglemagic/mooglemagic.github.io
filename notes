@@ -16,3 +16,9 @@ TILL
 1) Still doesn't always due to the naive method I am applying
 
 2) Needs better error checking
+
+CROSSWORD
+
+1) Image changes when user highlights form
+
+2) Answers are hidden after ~ 15 li items!!
