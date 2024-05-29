@@ -3,7 +3,7 @@
 
 2) Add text to each project box
 
-~~ 3) Work on realligning elements within each project box. ~~
+~~3) Work on realligning elements within each project box.~~
 
 4) Better icons are needed
 
