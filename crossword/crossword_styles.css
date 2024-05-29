@@ -1,17 +1,13 @@
-.container-fluid { 
-	padding: 0;
-}
-
 .image-background{
-	background: linear-gradient( rgba(0, 0, 0, 0.6), 
-		rgba(0, 0, 0, 0.6) ), url("imgs/words.jpg");
+	background: linear-gradient( rgba(0, 0, 0, 0.5), 
+		rgba(0, 0, 0, 0.5) ), url("imgs/words.jpg");
 	background-size: cover;
 	color: white;
-	padding: 0 13px;
+	height: 100vh;
 }
 
 hr {
-  height:3px;
+  height: 4px;
   background-color: white;
 }
 
@@ -27,12 +23,6 @@ hr {
 	font-size: 18px;
 }
 
-
-/*ANSWERS*/
-
-#answers-container {
-	min-height: 60vh;
-	background: rgba(30, 30, 0, 0.5);
-	color: white;
-	padding-top: 5px;
+#answers-list {
+	font-size: 2rem;
 }
