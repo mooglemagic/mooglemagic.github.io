@@ -1,9 +1,9 @@
 ## PROJECT PAGE
 1) All projects are in one div class of row THIS DOESNT MAKE SENSE
 
-2) Add text to each project box
+~~2) Add text to each project box~~
 
-~~3) Work on realligning elements within each project box.~~
+~~3. Work on realligning elements within each project box.~~
 
 4) Better icons are needed
 
@@ -11,9 +11,9 @@
 
 1) Needs a footer on all pages
 
-TILL
+## TILL
 
-1) Still doesn't work always due to the naive method I am applying
+1) Still doesn't always work due to the naive method I am applying
 
 2) Needs better error checking
 
