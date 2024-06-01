@@ -24,9 +24,15 @@ body {
 
 
 
-
 /*freecodecamp styles*/
 #free-code-camp-projects h1{
 	font-family: monospace;
 	color: #7CFC00;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .project-container p {
+  		font-size: 12px;
+	}
 }
