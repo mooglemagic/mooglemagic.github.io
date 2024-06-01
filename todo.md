@@ -9,6 +9,8 @@
 
 5) Think about what the description should say
 
+6) Looks poor on phone 
+
 
 ## ALL PAGES
 
