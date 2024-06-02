@@ -27,3 +27,11 @@ hr {
 #answers-list {
 	font-size: 2rem;
 }
+
+/*PHONE STYLES*/
+@media screen and (max-width: 600px) {
+
+  #answers-list {
+		font-size: 1rem;
+	}
+}
