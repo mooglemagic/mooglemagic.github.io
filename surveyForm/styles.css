@@ -20,16 +20,19 @@ body {
 
 #description {
 	margin-bottom: 25px;
-	font-weight: 100;
+	font-weight: 200;
 	font-style: italic;
 	letter-spacing: .05rem;
 }
+
+/*************FORM STYLES***************/
 
 form {
 	background-color: rgba(27, 27 ,50, 0.8);
 	max-width: 70%;
 	margin: 0 auto;
-	border-radius: 2%;
+	border-radius: 1%;
+	padding: 20px;
 }
 
 label, input {
@@ -38,5 +41,24 @@ label, input {
 }
 
 input {
-	width: 75%;
+	width: 100%;
+	padding: 10px 2px;
+	margin-bottom: 10px;
+}
+
+fieldset {
+	border: none;
+}
+
+select {
+	width: 100%;
+}
+
+/************* SUBMIT BUTTON ***************/
+input[type="submit"] {
+	background-color: #37AF65;
+	border: none;
+	color: white;
+	margin-top: 10px;
+	border-radius: 6px;
 }
