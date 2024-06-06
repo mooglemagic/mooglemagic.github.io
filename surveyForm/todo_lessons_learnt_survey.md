@@ -11,11 +11,11 @@
 
 *I just removed the cols attribute and used css to manually set width...seems to work?!*
 
-5. Is there any point to fieldset?
-6. Use rem for text?
-7. In dropdown boxes the first options of "Select current role" should not be an option!
-~~8. Go through FCC form tutorial~~ 
-9. Select and input have different widths grrr...
+5. Use rem for text?
+6. In dropdown boxes the first options of "Select current role" should not be an option!
+~~7. Go through FCC form tutorial~~ 
+
+8. Select and input have different widths grrr...
 
 
 ## Lessons Learnt
