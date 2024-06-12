@@ -19,6 +19,6 @@
 
 
 ## Lessons Learnt
-1. Give all radio button sthe same name attribute so only one can be selected by the user
-2. The select element is a container of option elements. It shows these ina dropdown menu. Each options element must have a value attribute to provide meaning when the form is sent otherwise their content is sent instead of value.
+1. Give all radio buttons the same name attribute so only one can be selected by the user
+2. The select element is a container of option elements. It shows these in a dropdown menu. Each options element must have a value attribute to provide meaning when the form is sent otherwise their content is sent instead of value. The same is true of checkboxes.
 3. Adding css variables using :root
