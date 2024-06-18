@@ -6,28 +6,48 @@ let lives = 5;
 let englishVerbArray;
 let englishVerb;
 
-const verbs = {
+let verbs = {
 	"To appear/come out": "でる",
 	"To know": "しる",
 	"To ride/ get on": "のる",
 	"To fix/mend": "なおす",
-	"To move operate": "うごく"
+	"To move operate": "うごく",
+	"To laugh": "わらう",
+	"To be mad": "おこる",
+	"To cry": "なく"
 }
 
 let questionLabel = document.getElementById("questionVerb");
+let submitButton = document.getElementById("submit");
+let answerInput = document.getElementById("answer");
+let livesHeader = document.getElementById("lives");
 
-// document.getElementById("test").textContent = verbs["appear/come out"];
+
+submitButton.onclick = ()=> {
+	let isAnswerCorrect = checkVerbEnglishToJapanese(englishVerb, answerInput.value);
+	if (isAnswerCorrect == false) {
+		reduceLife();
+	} else {
+		removeCurrentVerbFromArray();
+	}
+	playRound()
+};
 
 function setRandomVerb() {
-	let index = Math.floor(Math.random()*englishVerbArray.length)
+	let index = Math.floor(Math.random()*englishVerbArray.length);
 	englishVerb = englishVerbArray[index];
 }
 
 function removeCurrentVerbFromArray() {
-	englishVerbArray.indexOf(englishVerb)
+	// console.log(
+	// 	englishVerbArray.indexOf(englishVerb)
+	// );
+	delete verbs[englishVerb];
+	console.log(verbs)
 }
 
 function checkVerbEnglishToJapanese(englishQuestion, japaneseAnswer) {
+	// console.log(`${verbs[englishQuestion]} is the question and ${japaneseAnswer} is the answer`)
 	return verbs[englishQuestion] == japaneseAnswer;
 }
 
@@ -36,15 +56,18 @@ function checkVerbJapaneseToEnglish(japaneseQuestion, englishAnswer) {
 	return true
 }
 
+function reduceLife() {
+	lives--;
+	livesHeader.innerHTML = "Lives : " + lives;
+}
 
-function startGame() {
+function playRound() {
 	englishVerbArray = Object.keys(verbs);
 	setRandomVerb();
 	console.log(englishVerb);
 	questionLabel.innerHTML = englishVerb + ":"
-	// check if user has won
-	// check if user is out of lives
-	// ask next question
 }
 
-startGame()
+// starts game
+//further rounds instigated by button
+playRound();
