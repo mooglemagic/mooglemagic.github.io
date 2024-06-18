@@ -27,6 +27,7 @@ submitButton.onclick = ()=> {
 	let isAnswerCorrect = checkVerbEnglishToJapanese(englishVerb, answerInput.value);
 	if (isAnswerCorrect == false) {
 		reduceLife();
+		checkLife()
 	} else {
 		removeCurrentVerbFromArray();
 	}
@@ -61,10 +62,17 @@ function reduceLife() {
 	livesHeader.innerHTML = "Lives : " + lives;
 }
 
+function checkLife(){
+	if(lives<=0) {
+		console.log("DEAD");
+	}
+}
+
 function playRound() {
 	englishVerbArray = Object.keys(verbs);
 	setRandomVerb();
-	console.log(englishVerb);
+	answerInput.value = "";
+	// console.log(englishVerb);
 	questionLabel.innerHTML = englishVerb + ":"
 }
 
