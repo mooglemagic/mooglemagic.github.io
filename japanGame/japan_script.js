@@ -14,7 +14,11 @@ let words = {
 	"To move operate": "うごく",
 	"To laugh": "わらう",
 	"To be mad": "おこる",
-	"To cry": "なく"
+	"To cry": "なく",
+	"To lose":"なくす",
+	"To find (active)": "みつける",
+	"To find (passive)": "みつかる",
+	"Interview": "めんせつ"
 }
 
 let questionLabel = document.getElementById("questionVerb");
