@@ -6,7 +6,7 @@ let lives = 5;
 let englishVerbArray;
 let englishVerb;
 
-let verbs = {
+let words = {
 	"To appear/come out": "でる",
 	"To know": "しる",
 	"To ride/ get on": "のる",
@@ -21,6 +21,8 @@ let questionLabel = document.getElementById("questionVerb");
 let submitButton = document.getElementById("submit");
 let answerInput = document.getElementById("answer");
 let livesHeader = document.getElementById("lives");
+let lifeContainer = document.getElementById("life-container");
+
 
 
 submitButton.onclick = ()=> {
@@ -43,13 +45,13 @@ function removeCurrentVerbFromArray() {
 	// console.log(
 	// 	englishVerbArray.indexOf(englishVerb)
 	// );
-	delete verbs[englishVerb];
-	console.log(verbs)
+	delete words[englishVerb];
+	console.log(words)
 }
 
 function checkVerbEnglishToJapanese(englishQuestion, japaneseAnswer) {
-	// console.log(`${verbs[englishQuestion]} is the question and ${japaneseAnswer} is the answer`)
-	return verbs[englishQuestion] == japaneseAnswer;
+	// console.log(`${words[englishQuestion]} is the question and ${japaneseAnswer} is the answer`)
+	return words[englishQuestion] == japaneseAnswer;
 }
 
 function checkVerbJapaneseToEnglish(japaneseQuestion, englishAnswer) {
@@ -59,21 +61,32 @@ function checkVerbJapaneseToEnglish(japaneseQuestion, englishAnswer) {
 
 function reduceLife() {
 	lives--;
+	lifeContainer.innerHTML = '<h3 id="lives">Lives :</h3>'
+;
 	livesHeader.innerHTML = "Lives : " + lives;
+	for(let i = 0; i < lives; i++) {
+		lifeContainer.innerHTML += '<img class="heart-img" src="imgs/heart.png">'
+	}
+	
 }
 
 function checkLife(){
 	if(lives<=0) {
+		//reset()
 		console.log("DEAD");
 	}
 }
 
 function playRound() {
-	englishVerbArray = Object.keys(verbs);
+	englishVerbArray = Object.keys(words);
 	setRandomVerb();
 	answerInput.value = "";
 	// console.log(englishVerb);
 	questionLabel.innerHTML = englishVerb + ":"
+}
+
+function reset() {
+	//pass
 }
 
 // starts game
