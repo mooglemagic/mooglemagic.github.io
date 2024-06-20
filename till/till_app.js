@@ -73,6 +73,7 @@ let takingsTotal = document.getElementById("takings_total");
 let takingsValueContainer = document.getElementById("takings_value_container");
 
 let floatErrorMsgContainer = document.getElementById("float_error_container");
+let takingsErrorContainer = document.getElementById("takings_error_container");
 
 let profitTotalContainer = document.getElementById("profit_total");
 
@@ -96,7 +97,7 @@ function errorHandling(error){
 		floatValueContainer.classList.remove('border-success');
 	}
 	if (error) {
-		floatErrorMsgContainer.innerHTML = "Some values are input incorrectly!!";
+		floatErrorMsgContainer.innerHTML = "Some values are entered incorrectly!!";
 	} else if (totalMoneyInTill!= float) {
 		floatErrorMsgContainer.innerHTML = "Total is not equal to £" + float;
 	} else {
@@ -106,21 +107,17 @@ function errorHandling(error){
 
 function checkTakings() {
 	clearTillObjects();
-	addToTillObject();
-	// takings is in pence
-	sumTakings();
-	const profit = (totalMoneyInTill - float*100)/100;
-	takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
-
-	//error handling needs updating 
-
-	if (profit < 0) {
-		console.log("Money is missing");
-	} else {
+	if (checkTakingsForErrors()){
+		addToTillObject();
+		// takings is in pence
+		sumTakings();
+		const profit = (totalMoneyInTill - float*100)/100;
+		takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
 		createNewFloat();
 		enterProfit(profit);	
 		enterNewFloat();
-	}
+	};
+
 }
 
 function clearTillObjects() {
@@ -133,7 +130,30 @@ function clearTillObjects() {
 	return 0;
 }
 
+function checkTakingsForErrors() {
+	// same as error checker below
+	let correct = true;
+	const values = [twentyPoundTakings, tenPoundTakings, fivePoundTakings, twoPoundTakings, onePoundTakings, fiftyPenceTakings, twentyPenceTakings, tenPenceTakings, fivePenceTakings, twoPenceTakings, onePenceTakings];
+	const pennies = [2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
+
+	for(let i = 0; i < values.length; i ++ ) {
+		if(values[i].value != 0 && (Math.floor(values[i].value*100))%pennies[i] != 0) {
+			values[i].classList.add('border-danger');
+			correct = false;
+		} else {
+			values[i].classList.remove("border-danger")
+		}
+	}
+
+	if (!correct) {
+		takingsErrorContainer.innerHTML = "Some values are entered incorrectly";
+	}
+
+	return correct;
+}
+
 function addToTillObject() {
+	// adds number of notes/coins to object
 	moneyInTill["20pound"][0] = Number(twentyPoundTakings.value)/20;
 	moneyInTill["10pound"][0] = Number(tenPoundTakings.value)/10;
 	moneyInTill["5pound"][0] = Number(fivePoundTakings.value)/5; 
