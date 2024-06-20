@@ -77,6 +77,7 @@ function reduceLife() {
 function checkLife(){
 	if(lives<=0) {
 		//reset()
+		lifeContainer.innerHTML = '<h3 id="game-over">Game Over!</h3>'
 		console.log("DEAD");
 	}
 }
