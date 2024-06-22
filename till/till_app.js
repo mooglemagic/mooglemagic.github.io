@@ -81,14 +81,15 @@ let float = 150.0;
 let totalMoneyInTill = 0;
 
 function checkFloat() {
-	const error = !isFloatEnteredReasonable();
-	totalMoneyInTill = sumFloat();
-	float_total.innerHTML= "£" + totalMoneyInTill;
-	errorHandling(error);	
+	// two similar error methods
+	if(checkForErrors("float")){
+		totalMoneyInTill = sumFloat();
+		float_total.innerHTML= "£" + totalMoneyInTill;
+		errorHandling();
+	}	
 }
 
-function errorHandling(error){
-	// only need one if else if .... 
+function errorHandling(){
 	if (totalMoneyInTill == float) {
 		floatValueContainer.classList.add('border-success');
 		floatValueContainer.classList.remove('border-danger');
@@ -96,18 +97,14 @@ function errorHandling(error){
 		floatValueContainer.classList.add('border-danger');
 		floatValueContainer.classList.remove('border-success');
 	}
-	if (error) {
-		floatErrorMsgContainer.innerHTML = "Some values are entered incorrectly!!";
-	} else if (totalMoneyInTill!= float) {
+	if (totalMoneyInTill!= float) {
 		floatErrorMsgContainer.innerHTML = "Total is not equal to £" + float;
-	} else {
-		floatErrorMsgContainer.innerHTML = ".";
-	}
+	} 
 }
 
 function checkTakings() {
 	clearTillObjects();
-	if (checkTakingsForErrors()){
+	if (checkForErrors("takings")){
 		addToTillObject();
 		// takings is in pence
 		sumTakings();
@@ -130,28 +127,6 @@ function clearTillObjects() {
 	return 0;
 }
 
-function checkTakingsForErrors() {
-	// same as error checker below
-	let correct = true;
-	const values = [twentyPoundTakings, tenPoundTakings, fivePoundTakings, twoPoundTakings, onePoundTakings, fiftyPenceTakings, twentyPenceTakings, tenPenceTakings, fivePenceTakings, twoPenceTakings, onePenceTakings];
-	const pennies = [2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
-
-	for(let i = 0; i < values.length; i ++ ) {
-		if(values[i].value != 0 && (Math.floor(values[i].value*100))%pennies[i] != 0) {
-			values[i].classList.add('border-danger');
-			correct = false;
-		} else {
-			values[i].classList.remove("border-danger")
-		}
-	}
-
-	if (!correct) {
-		takingsErrorContainer.innerHTML = "Some values are entered incorrectly";
-	}
-
-	return correct;
-}
-
 function addToTillObject() {
 	// adds number of notes/coins to object
 	moneyInTill["20pound"][0] = Number(twentyPoundTakings.value)/20;
@@ -165,7 +140,6 @@ function addToTillObject() {
 	moneyInTill["5pence"][0] = Math.round(Number(fivePenceTakings.value)/.05);
 	moneyInTill["2pence"][0] = Math.round(Number(twoPenceTakings.value)/.02);
 	moneyInTill["1pence"][0] = Math.round(Number(onePenceTakings.value)/.01);
-	//console.log(moneyInTill)
 }
 
 function sumFloat() {
@@ -289,10 +263,19 @@ function enterNewFloat(){
 	float_total.innerHTML= "£" + totalMoneyInTill;
 }
 
-function isFloatEnteredReasonable() {
-	// multiply by 100 to get in pence
+function checkForErrors(expectedValue) {
+	// same as error checker below
 	let correct = true;
-	const values = [twentyPound, tenPound, fivePound, twoPound, onePound, fiftyPence, twentyPence, tenPence, fivePence, twoPence, onePence];
+	let values;
+	let errorContainer;
+	if (expectedValue=="takings") {
+		values = [twentyPoundTakings, tenPoundTakings, fivePoundTakings, twoPoundTakings, onePoundTakings, fiftyPenceTakings, twentyPenceTakings, tenPenceTakings, fivePenceTakings, twoPenceTakings, onePenceTakings];
+		errorContainer = takingsErrorContainer;
+	} else {
+		values = [twentyPound, tenPound, fivePound, twoPound, onePound, fiftyPence, twentyPence, tenPence, fivePence, twoPence, onePence];
+		errorContainer = floatErrorMsgContainer;
+	}
+	 
 	const pennies = [2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
 
 	for(let i = 0; i < values.length; i ++ ) {
@@ -303,5 +286,12 @@ function isFloatEnteredReasonable() {
 			values[i].classList.remove("border-danger")
 		}
 	}
+
+	if (!correct) {
+	 	errorContainer.innerHTML = "Some values are entered incorrectly";
+	} else {
+		errorContainer.innerHTML = ".";
+	} 
+
 	return correct;
 }
