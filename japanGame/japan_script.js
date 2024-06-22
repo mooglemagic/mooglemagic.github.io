@@ -65,8 +65,7 @@ function checkVerbJapaneseToEnglish(japaneseQuestion, englishAnswer) {
 
 function reduceLife() {
 	lives--;
-	lifeContainer.innerHTML = '<h3 id="lives">Lives :</h3>'
-;
+	lifeContainer.innerHTML = '<h3 id="lives">Lives :</h3>';
 	livesHeader.innerHTML = "Lives : " + lives;
 	for(let i = 0; i < lives; i++) {
 		lifeContainer.innerHTML += '<img class="heart-img" src="imgs/heart.png">'
