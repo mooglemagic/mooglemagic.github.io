@@ -104,13 +104,14 @@ function errorHandling(){
 
 function checkTakings() {
 	clearTillObjects();
+	removeWarnings()
 	if (checkForErrors("takings")){
 		addToTillObject();
 		// takings is in pence
 		sumTakings();
-		if(totalMoneyInTill >= float) {
-			const profit = (totalMoneyInTill - float*100)/100;
-			takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
+		const profit = (totalMoneyInTill - float*100)/100;
+		takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
+		if(totalMoneyInTill >= float*100) {
 			createNewFloat();
 			enterProfit(profit);	
 			enterNewFloat();
@@ -269,12 +270,18 @@ function enterNewFloat(){
 }
 
 function floatHigherThanTakingsWarning() {
-	takingsErrorContainer.innerHTML = "Takings is lower than float!";
-	takingsValueContainer.classList.add('border-danger');
+	takingsErrorContainer.innerHTML = `Takings is lower than float! (£${float})`;
+	takingsValueContainer.classList.add("border-danger");
 }
 
 function removeWarnings() {
-	//pass
+	takingsValueContainer.classList.remove("border-danger");
+	floatValueContainer.classList.remove("border-danger");
+	takingsValueContainer.classList.remove("border-success");
+	floatValueContainer.classList.remove("border-success");
+
+	floatErrorMsgContainer.innerHTML = ".";
+	takingsErrorContainer.innerHTML = ".";
 }
 
 function checkForErrors(expectedValue) {
