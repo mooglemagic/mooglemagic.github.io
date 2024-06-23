@@ -108,11 +108,16 @@ function checkTakings() {
 		addToTillObject();
 		// takings is in pence
 		sumTakings();
-		const profit = (totalMoneyInTill - float*100)/100;
-		takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
-		createNewFloat();
-		enterProfit(profit);	
-		enterNewFloat();
+		if(totalMoneyInTill >= float) {
+			const profit = (totalMoneyInTill - float*100)/100;
+			takingsTotal.innerHTML = "£" + (totalMoneyInTill/100).toFixed(2);
+			createNewFloat();
+			enterProfit(profit);	
+			enterNewFloat();
+		} else {
+			floatHigherThanTakingsWarning();
+		}
+
 	};
 
 }
@@ -261,6 +266,15 @@ function enterNewFloat(){
 
 	totalMoneyInTill = sumFloat();
 	float_total.innerHTML= "£" + totalMoneyInTill;
+}
+
+function floatHigherThanTakingsWarning() {
+	takingsErrorContainer.innerHTML = "Takings is lower than float!";
+	takingsValueContainer.classList.add('border-danger');
+}
+
+function removeWarnings() {
+	//pass
 }
 
 function checkForErrors(expectedValue) {
