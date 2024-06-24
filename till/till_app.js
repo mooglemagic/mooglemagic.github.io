@@ -104,7 +104,7 @@ function errorHandling(){
 
 function checkTakings() {
 	clearTillObjects();
-	removeWarnings()
+	removeWarnings();
 	if (checkForErrors("takings")){
 		addToTillObject();
 		// takings is in pence
