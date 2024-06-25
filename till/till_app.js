@@ -292,17 +292,20 @@ function checkForErrors(expectedValue) {
 	if (expectedValue=="takings") {
 		values = [twentyPoundTakings, tenPoundTakings, fivePoundTakings, twoPoundTakings, onePoundTakings, fiftyPenceTakings, twentyPenceTakings, tenPenceTakings, fivePenceTakings, twoPenceTakings, onePenceTakings];
 		errorContainer = takingsErrorContainer;
+		// console.log("takings mode active");
 	} else {
 		values = [twentyPound, tenPound, fivePound, twoPound, onePound, fiftyPence, twentyPence, tenPence, fivePence, twoPence, onePence];
 		errorContainer = floatErrorMsgContainer;
+		// console.log("float mode active");
 	}
 	 
 	const pennies = [2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
 
 	for(let i = 0; i < values.length; i ++ ) {
-		if(values[i].value != 0 && (Math.floor(values[i].value*100))%pennies[i] != 0) {
+		if(values[i].value != 0 && (Math.round(values[i].value*100))%pennies[i] != 0) {
 			values[i].classList.add('border-danger');
 			correct = false;
+			// console.log(`${values[i].value} was wrong`);
 		} else {
 			values[i].classList.remove("border-danger")
 		}
