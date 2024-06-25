@@ -18,7 +18,11 @@ let words = {
 	"To lose":"なくす",
 	"To find (active)": "みつける",
 	"To find (passive)": "みつかる",
-	"Interview": "めんせつ"
+	"Interview": "めんせつ",
+	"To die": "しぬ",
+	"To live/Be alive": "いきる",
+	"To decide": "きぬる",
+	"To stop": "やめる"
 }
 
 let questionLabel = document.getElementById("questionVerb");
