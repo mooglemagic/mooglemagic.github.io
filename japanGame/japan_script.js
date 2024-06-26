@@ -27,6 +27,7 @@ let words = {
 
 let questionLabel = document.getElementById("questionVerb");
 let submitButton = document.getElementById("submit");
+// let hintButton = document.getElementById("hint")
 let answerInput = document.getElementById("answer");
 let livesHeader = document.getElementById("lives");
 let lifeContainer = document.getElementById("life-container");
@@ -41,9 +42,11 @@ submitButton.onclick = ()=> {
 		let isAnswerCorrect = checkVerbEnglishToJapanese(englishVerb, answerInput.value);
 		if (isAnswerCorrect == false) {
 			reduceLife();
+			giveCorrectAnswer();
 			checkLife();
 		} else {
 			removeCurrentVerbFromArray();
+			congratulatePlayer()
 		}
 		playRound();
 	}
@@ -88,8 +91,17 @@ function checkLife(){
 		lifeContainer.innerHTML = '<h3 id="game-over">Game Over!</h3>';
 		submitButton.value = "Play Again?";
 		answerInput.disabled = true;
+		answerInput.placeholder = "Unlucky!";
 		gameOver = true;
 	}
+}
+
+function giveCorrectAnswer() {
+	answerInput.placeholder = `The correct answer was ${words[englishVerb]}`; 
+}
+
+function congratulatePlayer() {
+	answerInput.placeholder = "Well done";
 }
 
 function playRound() {
@@ -120,6 +132,7 @@ function reset() {
 	reduceLife()
 	submitButton.value = "Go";
 	answerInput.disabled = false;
+	answerInput.placeholder = "がんばる!";
 	gameOver = false;
 }
 

@@ -1,6 +1,8 @@
 body {
 	background: linear-gradient(#333333, #383838);
 	color: white;
+	min-height: 100vh;
+	box-sizing: border-box;
 }
 
 .container {
@@ -34,7 +36,7 @@ form {
 #life-container {
 	margin-top: 110px;
 	margin-bottom: 40px;
-	height: 5vh;
+/*	height: 5vh;*/
 }
 
 .heart-img {
@@ -51,8 +53,8 @@ label {
 	width: 100%;
 }
 
-#submit{
-	display: block;
+.button{
+	display: inline-block;
 	width: 100%;
 	margin-top: 5px;
 	background-color:#C154C1;
